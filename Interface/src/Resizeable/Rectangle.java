@@ -1,14 +1,29 @@
 package Resizeable;
 
 public class Rectangle implements IResizeable{
-    private double length, wight;
+   private double width;
+    private double length;
 
     public Rectangle() {
     }
 
-    public Rectangle(double length, double wight) {
+    public Rectangle(double width, double length) {
+        this.width = width;
         this.length = length;
-        this.wight = wight;
+    }
+
+    public Rectangle(double width, double length, String color, boolean filled) {
+        super(color, filled);
+        this.width = width;
+        this.length = length;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
     }
 
     public double getLength() {
@@ -19,28 +34,30 @@ public class Rectangle implements IResizeable{
         this.length = length;
     }
 
-    public double getWight() {
-        return wight;
+    public double getArea() {
+        return width * this.length;
     }
 
-    public void setWight(double wight) {
-        this.wight = wight;
+    public double getPerimeter() {
+        return 2 * (width + this.length);
     }
 
     @Override
     public String toString() {
-        return "Rectangle{" +
-                "length=" + length +
-                ", wight=" + wight +
-                '}';
+        return "A Rectangle with width="
+                + getWidth()
+                + " and length="
+                + getLength()
+                + ", which is a subclass of "
+                + super.toString()
+                +"\n";
     }
 
     @Override
     public void resize(double percent) {
-        double beforeS = (length + wight) * 2;
-        System.out.println("Before rectangle area: " + beforeS);
-        double afterS = beforeS + (beforeS * (percent / 100));
-        System.out.println("After rectangle area: " + afterS);
-        System.out.println("------------------------");
+        System.out.println("The area of rectangle before resizing is: " + getArea());
+        this.width = (width * percent) / 100;
+        this.length = (length * percent) / 100;
+        System.out.println("The area of rectangle before resizing is: " + getArea());
     }
 }

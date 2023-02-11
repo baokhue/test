@@ -1,12 +1,17 @@
 package Resizeable;
 
 public class Circle implements IResizeable{
-    private double radius;
+   private double radius;
 
     public Circle() {
     }
 
     public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public Circle(double radius, String color, boolean filled) {
+        super(color, filled);
         this.radius = radius;
     }
 
@@ -18,19 +23,27 @@ public class Circle implements IResizeable{
         this.radius = radius;
     }
 
+    public double getArea() {
+        return radius * radius * Math.PI;
+    }
+
+    public double getPerimeter() {
+        return 2 * radius * Math.PI;
+    }
+
     @Override
     public String toString() {
-        return "Circle{" +
-                "radius=" + radius +
-                '}';
+        return "A Circle with radius="
+                + getRadius()
+                + ", which is a subclass of "
+                + super.toString()
+                +"\n";
     }
 
     @Override
     public void resize(double percent) {
-        double beforeS = Math.PI * radius * radius;
-        System.out.println("Before circle area: " + beforeS);
-        double afterS = beforeS + (beforeS * (percent / 100));
-        System.out.println("After circle area: " + afterS);
-        System.out.println("------------------------");
+        System.out.println("The area of circle before resizing is: " + getArea());
+        this.radius = (radius * percent) / 100;
+        System.out.println("The area of circle after resizing is: " + getArea());
     }
 }
