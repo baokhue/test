@@ -48,8 +48,12 @@ public class TennisGame {
         {
             for (int i=1; i<3; i++)
             {
-                if (i==1) tempScore = mFirstScore;
-                else { score +="-"; tempScore = mSecondScore;}
+                if (i==1) {
+                    tempScore = mFirstScore;
+                }
+                else {
+                    score +="-"; tempScore = mSecondScore;
+                }
                 switch(tempScore)
                 {
                     case 0:
