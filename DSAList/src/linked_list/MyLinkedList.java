@@ -3,107 +3,104 @@ package linked_list;
 import javax.xml.soap.Node;
 
 public class MyLinkedList {
-    private Node head;
-    private int numNodes;
-
-    public MyLinkedList(Object data) {
-        head = new Node(data);
-    }
-
-    public class Node {
-        private Node next;
-        private Object data;
-
-        public Node(Object data) {
-            this.data = data;
-        }
-
-        public Object getData() {
-            return data;
-        }
-    }
+    private Node first;
+    private Node last;
 
     public MyLinkedList() {
     }
 
-    public void add (int index, Object data) {
-        Node temp = head;
-        Node holder;
-
-        for(int i=0; i < index-1 && temp.next != null; i++) {
-            temp = temp.next;
-        }
-        holder = temp.next;
-        temp.next = new Node(data);
-        temp.next.next = holder;
-        numNodes++;
+    public MyLinkedList(Node newFirst) {
+        this.first = newFirst;
     }
 
-    public void addFirst(Object data) {
-        Node temp = head;
-        head = new Node(data);
-        head.next = temp;
-        numNodes++;
-    }
-
-    public void addLast (Object data) {
-        if (head == null)
-            addFirst(data);
-        else {
-            Node temp = head;
-            while (temp.next != null) temp = temp.next;
-            temp.next = new Node(data);
+    public void addFirst(E e) {
+        if (first == null) {
+            this.first = new Node(e);
+        } else {
+            Node tempNode = this.first;
+            this.first = new Node(e);
+            this.first.next = tempNode;
         }
     }
 
-    public void remove(int index) {
-        Node temp = head;
-
-        for (int i = 0; i < index - 1 && temp.next != null; i++) {
-            temp.next = temp.next.next;
+    public void addLast(E e) {
+        if (first == null) {
+            this.addFirst(e);
+        } else {
+            Node current = first;
+            while (true) {
+                if (current.next == null) {
+                    this.last = current;
+                    this.last.next = new Node(e);
+                    break;
+                } else {
+                    current = current.next;
+                }
+            }
         }
-
-        numNodes--;
     }
 
-    public Node get(int index){
-        Node temp=head;
-        for(int i=0; i<index; i++) {
-            temp = temp.next;
+    public void add(int index, E e) {
+        if (index == 0) {
+            this.addFirst(e);
+        } else if (index >= this.size()) {
+            this.addLast(e);
+        } else {
+            Node current = this.first;
+            for (int i = 1; i < index; i++) {
+                current = current.next;
+            }
+            Node tempNode = current.next;
+            current.next = new Node(e);
+            current.next.next = tempNode;
         }
-        return temp;
     }
+
+    public E remove(int index) {
+        if (index < 0 || index >= this.size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());
+        } else {
+            Node current = this.first;
+            Node removeNode;
+
+            for (int i = 1; i < index; i++) {
+                current = current.next;
+            }
+            removeNode = current.next;
+            current.next = current.next.next;
+            return (E) removeNode;
+        }
+    }
+
 
     public int size() {
-        Node temp = head;
-        int i = 0;
-        while (temp != null) {
-            temp = temp.next;
-            i++;
-        }
-        return i;
-    }
-
-    public int indexOf(Object data) {
-        Node temp = head;
-        int q = 0;
-        for (int i = 0; i <= numNodes; i++) {
-            if ((temp.data).equals(data)) {
-                q = i;
-                break;
-            }
-            else {
-                temp = temp.next;
+        int count = 0;
+        if (first == null) {
+            count = 0;
+        } else {
+            Node current = first;
+            count = 1;
+            while (current.next != null) {
+                count++;
+                current = current.next;
             }
         }
-        return q;
+        return count;
     }
 
-    public void printList() {
-        Node temp = head;
-        while(temp != null) {
-            System.out.println(temp.data);
-            temp = temp.next;
+    public String toString() {
+        String str = "[";
+        if (this.size() == 0) {
+            str += "]";
+        } else {
+            Node current = this.first;
+            str += current.toString() + ", ";
+            while (current.next != null) {
+                str += current.next.toString() + ", ";
+                current = current.next;
+            }
+            str += "]";
         }
+        return str;
     }
 }
