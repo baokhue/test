@@ -12,9 +12,9 @@ public class Manager {
             if (array[middle] == value) {
                 return middle;
             } else if (array[middle] > value) {
-                return right = middle - 1;
+                right = middle - 1;
             } else {
-                return left = middle + 1;
+                left = middle + 1;
             }
         }
 
