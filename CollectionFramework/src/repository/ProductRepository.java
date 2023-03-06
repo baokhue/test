@@ -31,17 +31,18 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public void updateProduct(int id, String newName, double newPrice) {
+    public void updateProduct(int updateId, String newName, double newPrice) {
+        productsList[updateId].getName();
+        productsList[updateId].getPrice();
+    }
+
+    @Override
+    public void removeProduct(int removeId) {
 
     }
 
     @Override
-    public void removeProduct(int id) {
-
-    }
-
-    @Override
-    public void searchProduct(String name) {
+    public void searchProduct(String searchName) {
 
     }
 

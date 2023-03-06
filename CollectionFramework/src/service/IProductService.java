@@ -7,11 +7,11 @@ public interface IProductService {
 
     void addProduct (Product product);
 
-    void updateProduct (int id, String newName, double newPrice);
+    void updateProduct (int updateId, String newName, double newPrice);
 
-    void removeProduct (int id);
+    void removeProduct (int removeId);
 
-    void searchProduct (String name);
+    void searchProduct (String searchName);
 
     void sortAscendingByPrice ();
 

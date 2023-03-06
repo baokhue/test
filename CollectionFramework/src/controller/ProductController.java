@@ -45,6 +45,7 @@ public class ProductController {
                     System.out.print("Input id needed to update: ");
                     int newId = Integer.parseInt(scanner.nextLine());
 
+
                     break;
                 case 4: //delete
 

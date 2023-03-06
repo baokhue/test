@@ -18,18 +18,18 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public void updateProduct(int id, String newName, double newPrice) {
-
+    public void updateProduct(int updateId, String newName, double newPrice) {
+        repository.updateProduct(updateId, newName, newPrice);
     }
 
     @Override
-    public void removeProduct(int id) {
-
+    public void removeProduct(int removeId) {
+        repository.removeProduct(removeId);
     }
 
     @Override
-    public void searchProduct(String name) {
-
+    public void searchProduct(String searchName) {
+        repository.searchProduct(searchName);
     }
 
     @Override
