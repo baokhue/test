@@ -1,8 +1,6 @@
 package read_file;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +27,13 @@ public class ReadFileCSV {
         }
         buff.close();
         return countryList;
+    }
+
+    public static void writeCSV(Country country) throws IOException {
+        FileWriter fileWriter = new FileWriter(FILE_PATH);
+        BufferedWriter buff = new BufferedWriter(fileWriter);
+        buff.write(country.getId() + "," + country.getCode() + "," + country.getName() + "\n");
+        buff.close();
     }
 
     public static void main(String[] args) throws IOException {
